@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* CSS for carousel images */
+        .carousel-item img {
+            max-height: 300px;
+            display: block;
+            margin: 0 auto; /* Align images in center */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to the Tech News Hub</h1>
+</header>
+<nav>
+    <a href="/admin">Admin Panel</a>
+    <a href="/location">Location</a>
+    <a href="/device-info">Devices</a>
+    <a href="/exchange-rates">Exchange-rates</a>
+    <a href="/btcChart">BtcChart</a>
+    <a href="/crypto-news">CryptoNews</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+
+<main class="center-content">
+    <% if (items.length > 0) { %>
+        <% items.forEach((item, index) => { %>
+            <div class="container my-4">
+                <h2><%= item.names %></h2>
+                <p><%= item.descriptions %></p>
+                <div id="carousel<%= index %>" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel<%= index %>" data-slide-to="0" class="active"></li>
+                        <% if(item.picture2) { %><li data-target="#carousel<%= index %>" data-slide-to="1"></li><% } %>
+                        <% if(item.picture3) { %><li data-target="#carousel<%= index %>" data-slide-to="2"></li><% } %>
+                    </ol>
+                    
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<%= item.picture1 %>" alt="First Image" class="d-block w-100">
+                        </div>
+                        <% if(item.picture2) { %>
+                            <div class="carousel-item">
+                                <img src="<%= item.picture2 %>" alt="Second Image" class="d-block w-100">
+                            </div>
+                        <% } %>
+                        <% if(item.picture3) { %>
+                            <div class="carousel-item">
+                                <img src="<%= item.picture3 %>" alt="Third Image" class="d-block w-100">
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#carousel<%= index %>" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel<%= index %>" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>No phones found.</p>
+    <% } %>
+</main>
+
+<!-- Add Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- Add Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

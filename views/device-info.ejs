@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Devices</title>
+    <link rel="stylesheet" href="/device.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Device Information</h1>
+        <% devices.forEach(device => { %>
+            <div class="device">
+                <h2><%= device.DeviceName %></h2>
+                <p><span class="strong">Brand:</span> <%= device.Brand %></p>
+                <p><span class="strong">Display Technology:</span> <%= device.technology %></p>
+                <p><span class="strong">Primary Camera:</span> <%= device.primary_camera %></p>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

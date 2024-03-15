@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+<header>
+    <h1>Admin Dashboard</h1>
+</header>
+<div class="container">
+    <!-- Form for adding a new item -->
+    <form action="/admin/add-item" method="post" onsubmit="return validateAdd()">
+        <h2>Add Phone</h2>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+        <br>
+        <label for="picture1">Picture 1 link:</label>
+        <input type="text" name="picture1" id="picture1" required>
+        <br>
+        <label for="picture2">Picture 2 link:</label>
+        <input type="text" name="picture2" id="picture2" required>
+        <br>
+        <label for="picture3">Picture 3 link:</label>
+        <input type="text" name="picture3" id="picture3" required>
+        <br>
+        <label for="names">Name:</label>
+        <input type="text" name="names" id="names" required>
+        <br>
+        <label for="descriptions">Price:</label>
+        <input type="text" name="descriptions" id="descriptions" required>
+        <br>
+
+        <button type="submit">Add Phone</button>
+        <% if (message) { %>
+            <p><%= message %></p>
+        <% } %>
+    </form>
+</div>
+<div class="container">
+    <!-- Form for editing an existing item -->
+    <form action="/admin/edit-item" method="post" onsubmit="return validateEdit()">
+        <h2>Edit Phone</h2>
+        <label for="objectId">ID:</label>
+        <input type="text" name="objectId" id="objectId" required>
+        <br>
+        <label for="names">Name:</label>
+        <input type="text" name="names" id="names" required>
+        <br>
+        <label for="descriptions">Price:</label>
+        <input type="text" name="descriptions" id="descriptions" required>
+        <br>
+
+        <button type="submit">Edit Phone</button>
+        <% if (message) { %>
+            <p><%= message %></p>
+        <% } %>
+    </form>
+</div>
+<!-- Table to display all items -->
+<h2>All Phones</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Phone ID</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Created At</th>
+        <th>Action</th> <!-- New column for actions -->
+    </tr>
+    </thead>
+    <tbody>
+    <% items.forEach(item => { %>
+        <tr>
+            <td><%= item._id %></td>
+            <td><%= item.username %></td>
+            <td><%= item.names %></td>
+            <td><%= item.createdAt %></td>
+            <td>
+                <form action="/admin/delete-item/<%= item._id %>" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>
+</body>
+</html>

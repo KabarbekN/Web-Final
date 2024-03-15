@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cryptocurrency Price Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        #cryptoSelector {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #cryptoChart {
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Cryptocurrency Price Chart</h1>
+        <select id="cryptoSelector">
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+            <option value="DASH">Dash (DASH)</option>
+        </select>
+    </div>
+    
+    <div>
+        <canvas id="cryptoChart"></canvas>
+    </div>
+
+    <script>
+        let myChart;
+
+        async function fetchCryptoData(cryptoSymbol = 'ETH') {
+            const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${cryptoSymbol}&tsyms=USD,EUR&api_key=b73ea9600aae32bc3746b852604fb0a701a50f966bcae456fb427a81f3429770`;
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+        }
+
+        async function plotChart(cryptoSymbol = 'ETH') {
+            const cryptoData = await fetchCryptoData(cryptoSymbol);
+            const ctx = document.getElementById('cryptoChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.destroy(); // Destroy the old chart instance before creating a new one
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['USD', 'EUR'],
+                    datasets: [{
+                        label: `${cryptoSymbol} Price`,
+                        data: [cryptoData[cryptoSymbol].USD, cryptoData[cryptoSymbol].EUR],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('cryptoSelector').addEventListener('change', function() {
+            plotChart(this.value);
+        });
+
+        plotChart(); // Initial plot
+    </script>
+</body>
+</html>

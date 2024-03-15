@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cryptocurrency News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .news-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .news-article {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-article h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #333333;
+        }
+
+        .news-article h2 a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .news-article h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .news-article img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .news-article p {
+            color: #666666;
+        }
+
+        .news-article p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .news-articles {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Cryptocurrency News</h1>
+    <% if (newsArticles.length > 0) { %>
+        <div class="news-articles">
+            <% newsArticles.forEach(article => { %>
+                <div class="news-article">
+                    <h2><a href="<%= article.link %>" target="_blank"><%= article.title %></a></h2>
+                    <% if (article.image_url) { %>
+                        <img src="<%= article.image_url %>" alt="<%= article.title %>">
+                    <% } %>
+                    <p><%= article.description %></p>
+                    <p>Published at: <%= article.pubDate %></p>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p>No news articles found.</p>
+    <% } %>
+</body>
+</html>

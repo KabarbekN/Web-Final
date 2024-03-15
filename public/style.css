@@ -1,0 +1,38 @@
+/* Style.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    background: linear-gradient(135deg, #2980b9, #6dd5fa); /* Gradient background */
+    background-size: cover; /* Ensure the background image covers the entire viewport */
+    background-position: center; /* Center the background image */
+}
+
+.main-container {
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5em;
+    font-size: 50px;
+    color: #fff; /* Change text color to white */
+}
+
+nav a {
+    display: inline-block;
+    margin: 0 1em;
+    text-decoration: none;
+    background: #060a15;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 16px;
+    transition: background-color 0.3s; /* Add smooth transition for background color */
+}
+
+nav a:hover {
+    background-color: #0c172b; /* Darken the background color on hover */
+}
